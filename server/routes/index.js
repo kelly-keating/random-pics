@@ -5,11 +5,20 @@ const path = require('path')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  fs.readdir(path.join(__dirname, '..', 'public', 'houses'), (err, files) => {
+  fs.readdir(path.join(__dirname, '..', 'public', 'houses'), (err, houses) => {
     if (err) {
       res.status(500).send('oh no! ' + err.message)
     } else {
-      res.json(files)
+      fs.readdir(path.join(__dirname, '..', 'public', 'random'), (err, other) => {
+        if (err) {
+          res.status(500).send('oh no! ' + err.message)
+        } else {
+          res.json({
+            houses,
+            other
+          })
+        }
+      })
     }
   })
 })
