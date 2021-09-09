@@ -4,13 +4,13 @@ import { getPics } from '../api'
 
 function App () {
   const [houses, setHouses] = useState([])
-  const [other, setOther] = useState([])
+  const [random, setRandom] = useState([])
 
   useEffect(() => {
     getPics()
       .then(pics => {
         setHouses(pics.houses)
-        setOther(pics.other)
+        setRandom(pics.random)
       })
   }, [])
 
@@ -23,7 +23,7 @@ function App () {
         <a href={`/houses/${img}`}>House {i + 1}</a>
       </div>)}
       <h3>Random</h3>
-      {other.map((img, i) => <div>
+      {random.map((img, i) => <div>
         <a href={`/random/${img}`}>Picture {i + 1}</a>
       </div>)}
     </>
